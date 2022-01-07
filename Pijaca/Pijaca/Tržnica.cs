@@ -75,7 +75,7 @@ namespace Pijaca
             }
             else
                 throw new InvalidOperationException("Unijeli ste nepoznatu opciju!");
-        }
+        } 
 
         public void OtvoriŠtand(Prodavač p, List<Proizvod> pr, DateTime rok)
         {
@@ -109,8 +109,7 @@ namespace Pijaca
 
             Prodavač prodavač = štand.Prodavač;
             prodavač.RegistrujPromet(sigurnosniKod, ukupanPromet, najranijaKupovina, najkasnijaKupovina);
-        }
-
+        } 
         public void NaručiProizvode(Štand štand, List<Proizvod> proizvodi, List<int> količine, List<DateTime> rokovi, bool svi = false)
         {
             if (proizvodi.Count != količine.Count || proizvodi.Count != rokovi.Count)
@@ -129,6 +128,45 @@ namespace Pijaca
                 else
                     continue;
             }
+        }
+        //Radio Hamza Isić
+        public void NaručiProizvodeRefaktoring(Štand štand, List<Proizvod> proizvodi, List<int> količine, List<DateTime> rokovi, bool svi = false)
+        {
+            if (proizvodi.Count != količine.Count || proizvodi.Count != rokovi.Count)
+                throw new ArgumentException("Pogrešan unos parametara!");
+            if (svi) return;
+            int broj = 0;
+            proizvodi.ForEach(pr =>
+            {
+              
+                Proizvod proizvodRef = štand.Proizvodi.Find(p => p.ŠifraProizvoda == pr.ŠifraProizvoda);
+                if (proizvodRef == null)
+                    throw new ArgumentException("Nemoguće naručiti proizvod - nije registrovan na štandu!");
+
+                proizvodRef.NaručiKoličinu(količine[broj], rokovi[broj]);
+                broj++;
+            });
+        }
+        //Radio Adnan Hodžić
+        public void RadSaProdavačimaRefaktoring(Prodavač p, IOpcije opcija, double najmanjiPromet)
+        {
+            if (p == null)
+                throw new ArgumentNullException("Morate unijeti informacije o prodavaču!");
+
+            Prodavač postojeći = null;
+
+
+            foreach (var prodavač in prodavači)
+                if (prodavač.Ime == p.Ime)
+                    if (p.UkupniPromet < najmanjiPromet || prodavač.UkupniPromet < najmanjiPromet)
+                        return;
+                    else if (prodavač.UkupniPromet == p.UkupniPromet)
+                        postojeći = prodavač;
+
+            if (opcija is null)
+                throw new InvalidOperationException("Unijeli ste nepoznatu opciju!");
+
+            opcija.izvrsiIzmjenu( prodavači,  p,  postojeći);
         }
 
         #endregion
