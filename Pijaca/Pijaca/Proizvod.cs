@@ -154,6 +154,13 @@ namespace Pijaca
             return šifraProizvoda;
         }
 
+        public string GenerišiŠifruRefactoring(IDomaci domaći)
+        {
+            domaći.daLiJeDomaci(šifraProizvoda, brojač);
+            brojač++;
+            return šifraProizvoda;
+        }
+
         public void NaručiKoličinu(int količina, DateTime očekivaniDatumPristizanja)
         {
             OčekivanaKoličina += količina;
