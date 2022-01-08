@@ -11,22 +11,22 @@ namespace TestProject1
         public void Test1()
         {
             Tržnica t = new Tržnica();
-            DateTime datumOtvaranja = new DateTime(2021, 1, 2);
+            DateTime datumOtvaranja = new DateTime(2021, 11, 11);
 
-
-            int x = 0;
-
+            Prodavač prodavač = new Prodavač("Ime5000000", "124", datumOtvaranja, 15);
             for (int i=0; i<10000000; i++)
             {
-                Prodavač prodavač = new Prodavač("Ime", "124", System.DateTime.Now, 10);
-                t.RadSaProdavačima(prodavač, "Dodavanje", 20);
-
-                Prodavač prodavač2 = new Prodavač("Ime", "1245", System.DateTime.Now, 10);
-                t.RadSaProdavačima(prodavač2, "Izmjena", 20);
-                t.RadSaProdavačima(prodavač, "Brisanje", 20);
+                t.Prodavači.Add(new Prodavač("Ime" + i, "124", datumOtvaranja, 15));
+                
             }
+            int x = 0;
+            Prodavač prodavač2 = new Prodavač("Ime5000000", "121244", datumOtvaranja, 15);
+            t.RadSaProdavačima(prodavač2, "Izmjena", 15);
 
+            t.RadSaProdavačima(prodavač, "Brisanje", 15);
             int y = 0;
+
+            Assert.IsTrue(true);
         }
 
     }

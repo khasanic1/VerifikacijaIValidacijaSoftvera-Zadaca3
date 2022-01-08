@@ -18,7 +18,7 @@ namespace Pijaca
 
         #region Properties
 
-        public List<Prodavač> Prodavači { get => prodavači;}
+        public List<Prodavač> Prodavači { get => prodavači; set => prodavači = value; }
         public List<Štand> Štandovi { get => štandovi; }
         public double UkupniPrometPijace { get => ukupniPrometPijace; }
 
