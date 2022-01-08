@@ -168,6 +168,95 @@ namespace Pijaca
 
             opcija.izvrsiIzmjenu( prodavači,  p,  postojeći);
         }
+        //Adnan
+        public void RadSaProdavačimaTuning1(Prodavač p, string opcija, double najmanjiPromet)
+        {
+            if (p == null)
+                throw new ArgumentNullException("Morate unijeti informacije o prodavaču!");
+
+            Prodavač postojeći = null;
+            foreach (var prodavač in prodavači)
+            {
+
+                if (prodavač.Ime == p.Ime)
+                {
+                    if (p.UkupniPromet < najmanjiPromet || prodavač.UkupniPromet < najmanjiPromet)
+                        continue;
+                    else if (prodavač.UkupniPromet == p.UkupniPromet)
+                    {
+                        postojeći = prodavač;
+                        break;
+                    }
+
+                }
+            }
+
+
+            if (opcija == "Dodavanje")
+            {
+                if (prodavači.FindAll(prod => prod.Ime == p.Ime).Count > 0)
+                    throw new InvalidOperationException("Nemoguće dodati prodavača kad već postoji registrovan!");
+                else
+                    prodavači.Add(p);
+            }
+            else if (opcija == "Izmjena" || opcija == "Brisanje")
+            {
+                if (postojeći == null || prodavači.FindAll(prod => prod.Ime == p.Ime).Count == 0)
+                    throw new FormatException("Nemoguće izmijeniti tj. obrisati prodavača koji nije registrovan!");
+                else
+                {
+                    prodavači.Remove(postojeći);
+                    if (opcija == "Izmjena")
+                        prodavači.Add(p);
+                }
+            }
+            else
+                throw new InvalidOperationException("Unijeli ste nepoznatu opciju!");
+        }
+
+        //Adnan i Hamza
+        public void RadSaProdavačimaTuning2(Prodavač p, string opcija, double najmanjiPromet)
+        {
+            if (p == null)
+                throw new ArgumentNullException("Morate unijeti informacije o prodavaču!");
+
+            Prodavač postojeći = null;
+            foreach (var prodavač in prodavači)
+            {
+                if (prodavač.Ime == p.Ime)
+                {
+                    if (p.UkupniPromet < najmanjiPromet && prodavač.UkupniPromet < najmanjiPromet)
+                        continue;
+                    else if (prodavač.UkupniPromet == p.UkupniPromet)
+                    {
+                        postojeći = prodavač;
+                        break;
+                    }
+                        
+                }
+            }
+            bool pronađenoIme = Convert.ToBoolean(prodavači.FindAll(prod => prod.Ime == p.Ime).Count);
+            if (opcija == "Dodavanje")
+            {
+                if (pronađenoIme)
+                    throw new InvalidOperationException("Nemoguće dodati prodavača kad već postoji registrovan!");
+                else
+                    prodavači.Add(p);
+            }
+            else if (opcija == "Izmjena" || opcija == "Brisanje")
+            {
+                if (postojeći == null || !pronađenoIme)
+                    throw new FormatException("Nemoguće izmijeniti tj. obrisati prodavača koji nije registrovan!");
+                else
+                {
+                    prodavači.Remove(postojeći);
+                    if (opcija == "Izmjena")
+                        prodavači.Add(p);
+                }
+            }
+            else
+                throw new InvalidOperationException("Unijeli ste nepoznatu opciju!");
+        }
 
         #endregion
     }
