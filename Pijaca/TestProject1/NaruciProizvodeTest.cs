@@ -122,5 +122,37 @@ namespace TestProject1
 
             t.NaručiProizvode(štand, proslijeđeniProizvodi, kolicine, datumiRokova, false);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Put4()
+        {
+
+            List<Proizvod> proizvodi = new List<Proizvod>()
+            {
+                janjetina,
+                new Proizvod(Namirnica.Voće, "Jabuka", 5, new DateTime(2022, 1, 1), 23, false),
+                new Proizvod(Namirnica.Povrće, "Kupus", 7, new DateTime(2022, 1, 7), 23, true)
+            };
+
+            Štand štand = new Štand(prodavač, rok, proizvodi);
+
+
+            List<Proizvod> proslijeđeniProizvodi = new List<Proizvod>()
+            {
+                janjetina,
+                new Proizvod(Namirnica.Meso, "Teletina", 1, new DateTime(2022, 1, 1), 23, false),
+                new Proizvod(Namirnica.Meso, "Tunjevina", 7, new DateTime(2022, 1, 7), 23, true)
+            };
+
+            List<int> kolicine = new List<int>()
+            {
+                3,
+                4,
+                5
+            };
+
+            t.NaručiProizvode(štand, proslijeđeniProizvodi, kolicine, datumiRokova, false);
+        }
     }
 }
