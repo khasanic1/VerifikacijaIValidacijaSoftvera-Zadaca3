@@ -12,19 +12,22 @@ namespace TestProject1
         {
             Tržnica t = new Tržnica();
             DateTime datumOtvaranja = new DateTime(2021, 11, 11);
-
-            Prodavač prodavač = new Prodavač("Ime5000000", "124", datumOtvaranja, 15);
             for (int i=0; i<10000000; i++)
             {
                 t.Prodavači.Add(new Prodavač("Ime" + i, "124", datumOtvaranja, 15));
                 
             }
             int x = 0;
-            Prodavač prodavač2 = new Prodavač("Ime5000000", "121244", datumOtvaranja, 15);
-            t.RadSaProdavačima(prodavač2, "Izmjena", 15);
-
-            t.RadSaProdavačima(prodavač, "Brisanje", 15);
+            for (int i = 0; i < 15; i++)
+            {
+                Prodavač prodavač1 = new Prodavač("Ime5000000", "121244", datumOtvaranja, 15);
+                t.RadSaProdavačima(prodavač1, "Izmjena", 15);
+                Prodavač prodavač2 = new Prodavač("Ime10000001", "124611244", datumOtvaranja, 15);
+                t.RadSaProdavačima(prodavač2, "Dodavanje", 15);
+                t.RadSaProdavačima(prodavač2, "Brisanje", 15);
+            }
             int y = 0;
+
 
             Assert.IsTrue(true);
         }

@@ -57,7 +57,7 @@ namespace Pijaca
             }
             if (opcija == "Dodavanje")
             {
-                if (postojeći == null || prodavači.FindAll(prod => prod.Ime == p.Ime).Count == 0)
+                if (prodavači.FindAll(prod => prod.Ime == p.Ime).Count > 0)
                     throw new InvalidOperationException("Nemoguće dodati prodavača kad već postoji registrovan!");
                 else
                     prodavači.Add(p);
