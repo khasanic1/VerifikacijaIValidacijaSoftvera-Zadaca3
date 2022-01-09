@@ -27,8 +27,6 @@ namespace TestProject1
                 t.RadSaProdavačimaTuning2(prodavač2, "Brisanje", 15);
             }
             int y = 0;
-
-
             Assert.IsTrue(true);
         }
 
