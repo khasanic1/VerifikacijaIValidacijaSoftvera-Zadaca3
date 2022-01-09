@@ -154,6 +154,7 @@ namespace Pijaca
             return šifraProizvoda;
         }
 
+        //Radio - Kenan
         public string GenerišiŠifruRefactoring(IDomaci domaći)
         {
             domaći.daLiJeDomaci(šifraProizvoda, brojač);

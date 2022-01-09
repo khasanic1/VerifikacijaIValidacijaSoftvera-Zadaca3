@@ -232,7 +232,7 @@ namespace Pijaca
                         postojeći = prodavač;
                         break;
                     }
-                        
+
                 }
             }
             bool pronađenoIme = Convert.ToBoolean(prodavači.FindAll(prod => prod.Ime == p.Ime).Count);
@@ -258,6 +258,67 @@ namespace Pijaca
                 throw new InvalidOperationException("Unijeli ste nepoznatu opciju!");
         }
 
+        public void RadSaProdavačimaTuning3(Prodavač p, string opcija, double najmanjiPromet)
+        {
+            if (p == null)
+                throw new ArgumentNullException("Morate unijeti informacije o prodavaču!");
+
+            Prodavač postojeći = null;
+
+
+            for(int i = 0; i<prodavači.Count; i += 4)
+            {
+                if (prodavači[i].Ime == p.Ime || prodavači[i+1].Ime == p.Ime || prodavači[i+2].Ime == p.Ime || prodavači[i+3].Ime == p.Ime)
+                {
+                    if (p.UkupniPromet < najmanjiPromet && prodavači[i].UkupniPromet < najmanjiPromet && prodavači[i+1].UkupniPromet < najmanjiPromet && prodavači[i+2].UkupniPromet < najmanjiPromet && prodavači[i+3].UkupniPromet < najmanjiPromet)
+                        continue;
+                    else if (prodavači[i].UkupniPromet == p.UkupniPromet)
+                    {
+                        postojeći = prodavači[i];
+                        break;
+                    }
+                    else if (prodavači[i+1].UkupniPromet == p.UkupniPromet)
+                    {
+                        postojeći = prodavači[i+1];
+                        break;
+                    }
+                    else if (prodavači[i+2].UkupniPromet == p.UkupniPromet)
+                    {
+                        postojeći = prodavači[i+2];
+                        break;
+                    }
+                    else if (prodavači[i+3].UkupniPromet == p.UkupniPromet)
+                    {
+                        postojeći = prodavači[i+3];
+                        break;
+                    }
+
+                }
+
+            }
+
+            bool pronađenoIme = Convert.ToBoolean(prodavači.FindAll(prod => prod.Ime == p.Ime).Count);
+            if (opcija == "Dodavanje")
+            {
+                if (pronađenoIme)
+                    throw new InvalidOperationException("Nemoguće dodati prodavača kad već postoji registrovan!");
+                else
+                    prodavači.Add(p);
+            }
+            else if (opcija == "Izmjena" || opcija == "Brisanje")
+            {
+                if (postojeći == null || !pronađenoIme)
+                    throw new FormatException("Nemoguće izmijeniti tj. obrisati prodavača koji nije registrovan!");
+                else
+                {
+                    prodavači.Remove(postojeći);
+                    if (opcija == "Izmjena")
+                        prodavači.Add(p);
+                }
+            }
+            else
+                throw new InvalidOperationException("Unijeli ste nepoznatu opciju!");
+        }
         #endregion
     }
 }

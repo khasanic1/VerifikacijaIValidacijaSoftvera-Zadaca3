@@ -21,10 +21,10 @@ namespace TestProject1
             for (int i = 0; i < 15; i++)
             {
                 Prodavač prodavač1 = new Prodavač("Ime5000000", "121244", datumOtvaranja, 15);
-                t.RadSaProdavačima(prodavač1, "Izmjena", 15);
+                t.RadSaProdavačimaTuning2(prodavač1, "Izmjena", 15);
                 Prodavač prodavač2 = new Prodavač("Ime10000001", "124611244", datumOtvaranja, 15);
-                t.RadSaProdavačima(prodavač2, "Dodavanje", 15);
-                t.RadSaProdavačima(prodavač2, "Brisanje", 15);
+                t.RadSaProdavačimaTuning2(prodavač2, "Dodavanje", 15);
+                t.RadSaProdavačimaTuning2(prodavač2, "Brisanje", 15);
             }
             int y = 0;
 
